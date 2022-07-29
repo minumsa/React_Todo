@@ -1,12 +1,14 @@
-import React from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import List from "./List";
+import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
+import { Droppable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
+import List from './List';
 
-const Lists = React.memo(({ todoData, setTodoData }) => {
-  console.log("Lists Component");
+const Lists = React.memo(({ todoData, setTodoData, handleclick }) => {
+  console.log('Lists Component');
 
-  const handleEnd = result => {
-    console.log("result", result);
+  const handleEnd = (result) => {
+    console.log('result', result);
 
     if (!result.destination) return;
     const newTodoData = todoData;
@@ -23,7 +25,7 @@ const Lists = React.memo(({ todoData, setTodoData }) => {
     <div>
       <DragDropContext onDragEnd={handleEnd}>
         <Droppable droppableId="to-dos">
-          {provided => (
+          {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {todoData.map((data, index) => (
                 <Draggable
@@ -33,6 +35,7 @@ const Lists = React.memo(({ todoData, setTodoData }) => {
                 >
                   {(provided, snapshot) => (
                     <List
+                      handleclick={handleclick}
                       key={data.id}
                       id={data.id}
                       title={data.title}

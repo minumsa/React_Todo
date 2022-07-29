@@ -1,17 +1,20 @@
-import React from "react";
+import React from 'react';
 
 const List = React.memo(
-  ({ id, title, completed, todoData, setTodoData, provided, snapshot }) => {
-    console.log("List Component");
+  ({
+    id,
+    title,
+    completed,
+    todoData,
+    setTodoData,
+    provided,
+    snapshot,
+    handleClick,
+  }) => {
+    console.log('List Component');
 
-    const handleClick = id => {
-      let newTodoData = todoData.filter(data => data.id !== id);
-      console.log("newTodoData", newTodoData);
-      setTodoData(newTodoData);
-    };
-
-    const handleCompleteChange = id => {
-      let newTodoData = todoData.map(data => {
+    const handleCompleteChange = (id) => {
+      let newTodoData = todoData.map((data) => {
         if (data.id === id) {
           data.completed = !data.completed;
         }
@@ -27,7 +30,7 @@ const List = React.memo(
         ref={provided.innerRef}
         {...provided.dragHandleProps}
         className={`${
-          snapshot.isDragging ? "bg-gray-400" : "bg-gray-100"
+          snapshot.isDragging ? 'bg-gray-300' : 'bg-gray-100'
         } flex items-center justify-between w-full px-4 py-1 my-2 text-gray-500 bg-gray-100 border rounded`}
       >
         <div className="items-center">
@@ -35,8 +38,8 @@ const List = React.memo(
             type="checkbox"
             onChange={() => handleCompleteChange(id)}
             defaultChecked={completed}
-          />{" "}
-          <span className={completed ? "line-through" : undefined}>
+          />{' '}
+          <span className={completed ? 'line-through' : undefined}>
             {title}
           </span>
         </div>
