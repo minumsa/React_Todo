@@ -27,16 +27,22 @@ export default function App() {
     // eslint-disable-next-line
     e.preventDefault();
 
-    //새로운 할 일 데이터
+    // 새로운 할 일 데이터
     let newTodo = {
       id: Date.now(),
       title: value,
       completed: false,
     };
 
-    //원래 있던 할 일에 새로운 할 일 더해주기
+    // 원래 있던 할 일에 새로운 할 일 더해주기
     setTodoData((prev) => [...prev, newTodo]);
+
+    // 입력란에 있던 글씨 지우기
     setValue('');
+  };
+
+  const handleRemoveClick = () => {
+    setTodoData([]);
   };
 
   return (
@@ -44,6 +50,7 @@ export default function App() {
       <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">
         <div className="flex justify-between mb-3">
           <h1>할 일 목록</h1>
+          <button onClick={handleRemoveClick}>모두 지우기</button>
         </div>
         <Lists
           handleClick={handleClick}
