@@ -22,14 +22,15 @@ const List = React.memo(
         return data;
       });
       setTodoData(newTodoData);
+      localStorage.setItem('todoData', JSON.stringify(newTodoData));
     };
 
-    const handleEditChange = (event) => {
-      setEditedTitle(event.target.value);
+    const handleEditChange = (e) => {
+      setEditedTitle(e.target.value);
     };
 
     const handleSubmit = (event) => {
-      event.preventDafault();
+      event.preventDefault();
       let newTodoData = todoData.map((data) => {
         if (data.id === id) {
           data.title = editedTitle;
@@ -37,6 +38,7 @@ const List = React.memo(
         return data;
       });
       setTodoData(newTodoData);
+      localStorage.setItem('todoData', JSON.stringify(newTodoData));
       setIsEditing(false);
     };
 
@@ -51,6 +53,7 @@ const List = React.memo(
                 value={editedTitle}
                 onChange={handleEditChange}
                 classname="w-full px-3 py-2 mr-4 text-gray-500 rounded"
+                autoFocus
               />
             </form>
           </div>
